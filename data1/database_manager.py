@@ -2,16 +2,17 @@ import sqlite3
 from sqlite3 import Error
 
 
-def create_connection(db_file):
+def create_connection(connection_string):
+    print('checking')
     """ create a database connection to a SQLite database """
-    conn = None
+    conn = sqlite3.connect(connection_string)
     try:
-        conn = None  # To-Do add a connection for the database
+        conn = sqlite3.connect(connection_string)  # To-Do add a connection for the database
     except Error as e:
         print(e)
-
-    #To-Do return the connection 
-    return None 
+    print(conn)
+    #To-Do return the connection
+    return conn
 
 def close_connection(conn):
     """ closes a connection to a database """
@@ -21,13 +22,13 @@ def close_connection(conn):
 def select_all(conn):
     """select all rows from our table using the conn we already created """
     cur = conn.cursor()
-    query = "" # To-Do write the query to retrive all data from the longley table 
+    query = "SELECT * FROM longley"  # To-Do write the query to retrive all data from the longley table
 
     cur.execute(query)
 
-    rows = None  # To-Do fetch all rows using the cursor cur
+    rows = cur.fetchall()  # To-Do fetch all rows using the cursor cur
 
-    return rows 
+    return rows
 
 
 def print_rows(rows):
